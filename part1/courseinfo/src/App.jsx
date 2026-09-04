@@ -1,7 +1,4 @@
 import { useState } from 'react'
-import heroImg from './assets/hero.png'
-import reactLogo from './assets/react.svg'
-import viteLogo from './assets/vite.svg'
 
 const Header = ({name}) => {
   return  (
@@ -30,7 +27,7 @@ const Content = ({parts}) => {
 
 const Total = ({parts}) => {
   const total = parts[0].exercises + parts[1].exercises + parts[2].exercises
-  return <p>  Total Excercises = total</p>
+  return <p>  Total Excercises = {total}</p>
     
 }
 
