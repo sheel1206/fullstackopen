@@ -3,30 +3,23 @@ const Header = ({ name }) => {
 };
 
 const Content = ({ parts }) => {
-  return (
-    <>
-      {parts.map((part) => (
-        <Part key={part.id} part={part} />
-      ))}
-    </>
-  );
-};
+    return (
+        <>
+            {parts.map(part => <Part key={part.id} part={part} />)}
+        </>
+    )
+}
 
 const Part = ({ part }) => {
-  return (
-    <p>
-      {part.name} {part.exercises}
-    </p>
-  );
-};
+    return (
+        <p>{part.name} has {part.exercises} exercises</p>
+    )
+}
 
 const Total = ({ parts }) => {
-  let total = 0;
-  parts.forEach((part) => {
-    total += part.exercises;
-  });
-  return <p><b>Number of exercises {total}</b></p>;
-};
+    const total = parts.reduce((sum, part) => sum + part.exercises, 0)
+    return <p>Total exercises: {total}</p>
+}
 
 const Course = ({ course }) => {
   return (
@@ -35,7 +28,7 @@ const Course = ({ course }) => {
       <Content parts={course.parts} />
       <Total parts={course.parts} />
     </>
-  );
-};
+  )
+}
 
-export default Course;
+export default Course

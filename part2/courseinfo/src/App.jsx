@@ -1,5 +1,5 @@
-import { useState } from 'react'
-import Course from "./components/Course.jsx";
+import Course from './components/Course'
+
 
 const App = () => {
   const courses = [
@@ -46,16 +46,15 @@ const App = () => {
       ]
     }
   ]
-
-
+  
   return (
-  <>
+    <>
       <h1>Web development curriculum</h1>
       {courses.map((course) => (
         <Course key={course.id} course={course} />
       ))}
-  </>
-  )
-}
+    </>
+  );
+};
 
 export default App
