@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Coin Flip</title>
+</head>
+<body>  
+    <h1>Coin Flip</h1>
+
+    <button onclick="flipCoin()">Flip Coin</button>
+
+    <p id="result">Click the button to flip the coin.</p>
+    <p id="score">Heads: 0 | Tails: 0</p>
+
+    <script>
+        let headsCount = 0;
+        let tailsCount = 0;
+
+        function flipCoin() {
+            const result = Math.random() < 0.5 ? 'Heads' : 'Tails';
+
+            if (result === 'Heads') {
+                headsCount++;
+            } else {
+                tailsCount++;
+            }
+            const guess = prompt("Guess the result (Heads or Tails):");
+            if (guess) {
+                if (guess.toLowerCase() === result.toLowerCase()) {
+                    alert("You guessed correctly!");
+                } else {
+                    alert(`Wrong guess! The coin landed on ${result}.`);
+                }
+            }
+
+            document.getElementById('result').textContent = `The coin landed on ${result}.`;
+            document.getElementById('score').textContent = `Heads: ${headsCount} | Tails: ${tailsCount}`;
+        }
+    </script>
+</html>

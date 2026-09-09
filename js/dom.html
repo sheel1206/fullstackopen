@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 30px;
+        }
+        .subscribe-button {
+            background-color: #FF0000;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            border-radius: 10px;
+            font-weight: bold;
+        }
+
+
+        .subscribe-button:hover {
+            background-color: #CC0000;
+        }
+
+        .title{
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+
+        .cost-input {
+            padding: 10px;
+            font-size: 16px;
+            width: 200px;
+            margin-right: 10px;
+        }
+
+        .calculate-button {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            padding: 10px 10px;
+            font-size: 16px;
+            cursor: pointer;
+            border-radius: 10px;
+            font-weight: bold;
+        }
+    </style>
+    <head>
+        <title> DOM Projects</title>
+    </head>
+    <body>
+        <p>YouTube Subscribe Button</p>
+        <button onclick="subscribe()" class="js-subscribe-button subscribe-button">Subscribe</button>
+
+        <p> Amazon Shipping Calculator</p>
+        <p> Orders under $40: $10 shipping</p>
+        <p> Orders $40 and over: Free shipping</p>
+        <input placeholder = "Cost of Order" id="cost" type="number" class = "cost-input" />
+        <button onclick="calculateShipping()" class="calculate-button">Calculate Shipping</button>
+        <p id="shipping-cost"></p>
+
+        <script>
+            function subscribe() {
+                const buttonElement = document.querySelector('.js-subscribe-button');
+                if (buttonElement.innerText === 'Subscribe') {
+                    buttonElement.innerHTML = 'Subscribed';
+                    console.log('Subscribed');
+                    buttonElement.style.backgroundColor = '#000000'; // Change to black
+                } else {
+                    buttonElement.innerHTML = 'Subscribe';
+                    console.log('Unsubscribed');
+                    buttonElement.style.backgroundColor = '#FF0000'; // Change back to red
+                }
+            }
+
+            function calculateShipping() {
+                const costInput = document.getElementById('cost');
+                const cost = parseFloat(costInput.value);
+                let finalCost = cost;
+                let shippingCost;
+
+                if (isNaN(cost) || cost < 0) {
+                    alert('Please enter a valid cost.');
+                    return;
+                }
+
+                if (cost < 40) {
+                    shippingCost = 10;
+                } else {
+                    shippingCost = 0;
+                }
+                finalCost = cost + shippingCost;
+
+                document.getElementById('shipping-cost').textContent = `Shipping Cost: $${shippingCost.toFixed(2)}. Final Cost: $${finalCost.toFixed(2)}`;
+            }
+
+        </script>
+    </body>
+</html>

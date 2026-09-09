@@ -1,0 +1,128 @@
+/* *{
+    box-sizing: border-box;
+} */
+
+body{
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 48px 24px;
+    background: #f4f7f5;
+    color: #18332a;
+    font-family: "Segoe UI", Tahoma, sans-serif;
+}
+
+body > p{
+    margin: 0 0 24px;
+    color: #18332a;
+    font-size: 30px;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+}
+
+.todo-input-grid{
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 150px 100px;
+    column-gap: 10px;
+}
+
+.todo-input-grid input{
+    min-width: 0;
+    border: 1px solid #b9c9c0;
+    border-radius: 6px;
+    padding: 11px 12px;
+    background: #ffffff;
+    color: #18332a;
+    font: inherit;
+}
+
+.todo-input-grid input:focus{
+    outline: 2px solid #7bb89a;
+    outline-offset: 1px;
+    border-color: #39845b;
+}
+
+.js-name-input{
+    grid-column: 1;
+}
+
+.js-duedate{
+    grid-column: 2;
+}
+
+.todo-input-grid button{
+    grid-column: 3;
+}
+
+button{
+    border: 0;
+    border-radius: 6px;
+    padding: 11px 14px;
+    color: #ffffff;
+    cursor: pointer;
+    font: inherit;
+    font-weight: 700;
+    transition: filter 120ms ease, transform 120ms ease;
+}
+
+button:hover{
+    filter: brightness(0.94);
+}
+
+button:active{
+    transform: translateY(1px);
+}
+
+.todo-input-grid button{
+    background: #21834b;
+}
+
+.todo-list{
+    display: grid;
+    row-gap: 10px;
+    margin-top: 10px;
+}
+
+.todo-row{
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 150px 100px;
+    column-gap: 10px;
+    align-items: center;
+    min-height: 48px;
+    padding: 8px 10px;
+    border: 1px solid #d5e0d9;
+    border-radius: 6px;
+    background: #ffffff;
+}
+
+.todo-row span:first-child{
+    overflow-wrap: anywhere;
+    font-weight: 600;
+}
+
+.todo-row span:nth-child(2){
+    color: #587064;
+    font-size: 14px;
+}
+
+.todo-row button{
+    grid-column: 3;
+    background: #c83e3e;
+}
+
+@media (max-width: 560px){
+    body{
+        padding: 32px 16px;
+    }
+
+    .todo-input-grid,
+    .todo-row{
+        grid-template-columns: minmax(0, 1fr) 112px 84px;
+        column-gap: 6px;
+    }
+
+    .todo-input-grid input,
+    button{
+        padding: 10px 8px;
+        font-size: 14px;
+    }
+}

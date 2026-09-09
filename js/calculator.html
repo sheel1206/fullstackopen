@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+    <body>
+        <button onclick="numberPressed('1')">1</button>
+        <button onclick="numberPressed('2')">2</button>
+        <button onclick="numberPressed('3')">3</button>
+        <button onclick="add()">+</button>
+        <button onclick="subtract()">-</button>
+        <button onclick = "multiply()">*</button>
+        <button onclick="divide()">/</button>
+        <button onclick="calculate()">=</button>
+        <p id="display">0</p>
+        <button onclick="clearDisplay()">Clear</button>
+
+        <script>
+            const savedResult = localStorage.getItem('calculatorResult');
+            if (savedResult) {
+                document.getElementById('display').textContent = savedResult || '0';
+            }
+
+            function numberPressed(num) {
+                // Number press logic would go here
+                const number = parseInt(num);
+                document.getElementById('display').textContent = document.getElementById('display').textContent === '0' ? number : document.getElementById('display').textContent + number;
+            }
+            function add() {
+                // Addition logic would go here
+                document.getElementById('display').textContent += '+';
+            }
+            function subtract() {
+                // Subtraction logic would go here
+                document.getElementById('display').textContent += '-';
+            }
+
+            function multiply() {
+                // Multiplication logic would go here
+                document.getElementById('display').textContent += '*';
+            }
+            function divide() {
+                // Division logic would go here
+                document.getElementById('display').textContent += '/';
+            }
+            function calculate() {
+                // Calculator logic would go here
+                const displayContent = document.getElementById('display').textContent;
+                let result = 0;
+                if (displayContent.includes('+')) {
+                    const parts = displayContent.split('+');
+                    result = parseInt(parts[0]) + parseInt(parts[1]);
+                } else if (displayContent.includes('-')) {
+                    const parts = displayContent.split('-');
+                    result = parseInt(parts[0]) - parseInt(parts[1]);
+                } else if (displayContent.includes('*')) {
+                    const parts = displayContent.split('*');
+                    result = parseInt(parts[0]) * parseInt(parts[1]);
+                } else if (displayContent.includes('/')) {
+                    const parts = displayContent.split('/');
+                    result = parseInt(parts[0]) / parseInt(parts[1]);
+                }
+                if (!displayContent.includes('+') && !displayContent.includes('-') && !displayContent.includes('*') && !displayContent.includes('/')) {
+                    result = parseInt(displayContent);
+                }
+                document.getElementById('display').textContent = result;
+
+                localStorage.setItem('calculatorResult', result);
+            }
+
+            function clearDisplay() {
+                document.getElementById('display').textContent = '0';
+                localStorage.removeItem('calculatorResult');
+            }
+        </script>
+    </body>
+</html>
