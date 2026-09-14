@@ -1,8 +1,9 @@
-import {cart, removeFromCart, updateDeliveryOption} from '../../data/cart.js';
+import {cart, removeFromCart, updateDeliveryOption, updateQuantity} from '../../data/cart.js';
 import { products, getProduct } from '../../data/products.js';
 import { formatCurrency } from '../utils/money.js';
 import dayjs from 'https://unpkg.com/supersimpledev@8.5.0/dayjs/esm/index.js';
 import { deliveryOptions, getDeliveryOption } from '../../data/deliveryOptions.js';
+import { renderPaymentSummary } from './paymentSummary.js';
 
 export function renderOrderSummary(){
 
@@ -47,9 +48,14 @@ cart.forEach((cartItem) => {
             </div>
             <div class="product-quantity">
                 <span>
-                Quantity: <span class="quantity-label">${cartItem.quantity}</span>
+                Quantity: 
+                <select class="quantity-select js-quantity-select-${matchingProduct.id}">
+                ${[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map(num => `
+                    <option value="${num}" ${cartItem.quantity === num ? 'selected' : ''}>${num}</option>
+                    `).join('')}
+                </select>
                 </span>
-                <span class="update-quantity-link link-primary">
+                <span class="update-quantity-link link-primary js-update-link" data-product-id="${matchingProduct.id}">
                 Update
                 </span>
                 <span class="delete-quantity-link link-primary js-delete-link" data-product-id="${matchingProduct.id}">
@@ -131,6 +137,20 @@ document.querySelectorAll('.js-delete-link')
         })
     })
 
+document.querySelectorAll('.js-update-link')
+    .forEach((link) => {
+        link.addEventListener('click', () => {
+            const productId = link.dataset.productId;
+            
+            const selectElement = document.querySelector(`.js-quantity-select-${productId}`);
+            const newQuantity = Number(selectElement.value);
+            
+            updateQuantity(productId, newQuantity);
+
+            renderOrderSummary();
+            renderPaymentSummary();
+        })
+    })
 document.querySelectorAll('.js-delivery-option')
     .forEach((element) => {
         element.addEventListener('click', () => {
@@ -138,6 +158,7 @@ document.querySelectorAll('.js-delivery-option')
             updateDeliveryOption(productId, deliveryOptionId)
             //console.log({productId, deliveryOptionId})
             renderOrderSummary();
+            renderPaymentSummary();
     })
 })
 }
